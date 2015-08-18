@@ -1,5 +1,13 @@
 <form name="form" ng-submit="addBranch()">
-    <input type="text" id="title" ng-model="branch.title"><br>
+    <input type="text" id="title" ng-model="branch.title">
+    <br>
     <input type="text" id="body" ng-model="branch.code">
-    <input type="submit" value="Submit">
+    <br>
+    <input type="submit" class="btn btn-lg btn-primary" value="Submit">
+    <div class="container">
+
+        <div class="alert alert-success">
+            <strong>Success!</strong> Branch was successfully added.
+        </div>
+    </div>
 </form>

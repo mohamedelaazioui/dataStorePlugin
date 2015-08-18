@@ -38,11 +38,12 @@ angular.module('dataStore',['templates','ngRoute','ngResource'])
 
         $scope.addBranch = function(){
           Branch.save({ branch: $scope.branch});
+
         };
     }])
     .controller('branchesListCtrl',['$scope','Branches',function($scope,Branches){
         $scope.branches = Branches.query();
-        $scope.oderProp = 'numerical'
+        $scope.oderProp = 'numerical';
     }])
     .controller('welcomeCtrl',['$scope',function($scope){
         $scope.date = new Date();
