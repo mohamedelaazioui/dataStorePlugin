@@ -10,17 +10,21 @@
             </select>
 
         </div>
-        <div class="col-md-10">
-            <!--Body content-->
-
-            <ul class="branches">
-                <li ng-repeat="branch in branches | filter:query | orderBy:orderProp">
-                    {{branch.title}}
-                    <p>{{branch.code}}</p>
-                </li>
-            </ul>
-
-        </div>
-        <a href="#/create-branch" class="btn btn-lg btn-primary">Add a branch</a>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Office Name</th>
+                <th>Office Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="success" ng-repeat="branch in branches | filter:query | orderBy:orderProp">
+                <p1>{{branch.title}}<p1>
+                <p2>{{branch.code}}</p2>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
+
+<a href="#/create-branch" class="btn btn-lg btn-primary">Add a branch</a>
