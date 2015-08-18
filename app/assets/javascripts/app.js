@@ -13,6 +13,10 @@ angular.module('dataStore',['templates','ngRoute','ngResource'])
                 templateUrl: 'templates/branches-list.html',
                 controller: 'branchesListCtrl'
             }).
+            when('/create-branch',{
+                templateUrl: 'templates/create-branch',
+                controller: 'branchCtrl'
+            }).
             otherwise({
                 redirectTo :'/'
             });
@@ -21,6 +25,20 @@ angular.module('dataStore',['templates','ngRoute','ngResource'])
         return $resource('branches.json',{},{
             query: {method: 'GET', params:{branchId:'branch'}, isArray:true}
         });
+    }])
+    .factory('Branch',['$resource', function($resource){
+        return $resource('branches/:id.json',{id: '@id'},{
+            update: {
+                method: 'PUT'
+            }
+        });
+    }])
+    .controller('branchCtrl',['$scope','Branch',function($scope,Branch){
+        $scope.branch = new Branch();
+
+        $scope.addBranch = function(){
+          Branch.save({ branch: $scope.branch});
+        };
     }])
     .controller('branchesListCtrl',['$scope','Branches',function($scope,Branches){
         $scope.branches = Branches.query();
