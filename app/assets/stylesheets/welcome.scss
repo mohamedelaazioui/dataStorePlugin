@@ -32,3 +32,9 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
+
+DIV.container {
+  min-height: 10em;
+  display: table-cell;
+  vertical-align: middle
+}

@@ -10,17 +10,17 @@
             </select>
 
         </div>
-        <table class="table">
+        <table class="table" >
             <thead>
             <tr>
                 <th>Office Name</th>
                 <th>Office Number</th>
             </tr>
             </thead>
-            <tbody>
-            <tr class="success" ng-repeat="branch in branches | filter:query | orderBy:orderProp">
-                <p1>{{branch.title}}<p1>
-                <p2>{{branch.code}}</p2>
+            <tbody >
+            <tr class="danger" ng-repeat="branch in branches | filter:query | orderBy:orderProp">
+                <td>{{branch.title}}</td>
+                <td>{{branch.code}}</td>
             </tr>
             </tbody>
         </table>
