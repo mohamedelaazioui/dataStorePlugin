@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
-  #scope '/api' do
+  scope '/api' do
     #resources :accounts
     #resources :status
     #resources :account_categories
-  #end
+    resources :clients
+  end
   resources :branches do
     resources :clients
   end

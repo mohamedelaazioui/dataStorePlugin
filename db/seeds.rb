@@ -6,3 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Client.create(firstName: 'John', lastName: 'leBron', birthDate: '06/09/1980', language: 'Dutch', maritalStatus: 'Single',PSP:'900', SSN: '80090648540', branch_id: '1')

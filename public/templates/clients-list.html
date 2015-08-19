@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <!--Sidebar content-->
+            Search: <input ng-model="query">
+            <br>
+            Sort by:
+            <br>
+            <select ng-model="clientOrderProp">
+                <option value="lastName">Alphabetical</option>
+                <option value="PSP">Numerical</option>
+            </select>
+
+        </div>
+        <table class="table" >
+            <thead>
+            <tr>
+                <th>PSP</th>
+                <th>branch id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Birth Date</th>
+                <th>language</th>
+                <th>Marital Status</th>
+                <th>Social Security Number</TH>
+
+            </tr>
+            </thead>
+            <tbody >
+            <tr class="danger" ng-repeat="client in clients | filter:query | orderBy:clientOrderProp">
+                <td>{{client.PSP}}</td>
+                <td>{{client.branch_id}}</td>
+                <td>{{client.firstName}}</td>
+                <td>{{client.lastName}}</td>
+                <td>{{client.birthDate}}</td>
+                <td>{{client.language}}</td>
+                <td>{{client.maritalStatus}}</td>
+                <td>{{client.SSN}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<a href="#/create-client" class="btn btn-lg btn-primary">Add a client</a>
