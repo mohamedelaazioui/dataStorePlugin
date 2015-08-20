@@ -1,0 +1,36 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <!--Sidebar content-->
+            Search: <input ng-model="query">
+            <br>
+            Sort by:
+            <br>
+            <select ng-model="orderReq">
+                <option value="-Date">Creation Date</option>
+                <option value="Project">Alphanumeric</option>
+            </select>
+
+        </div>
+        <table class="table" >
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Project</th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr class="danger" ng-repeat="request in requests | filter:query | orderBy:orderReq">
+                <td>{{request.ID}}</td>
+                <td>{{request.Description}}</td>
+                <td>{{request.Date}}</td>
+                <td>{{request.Project}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<a href="#/create-request" class="btn btn-lg btn-primary">Add a new request</a>
