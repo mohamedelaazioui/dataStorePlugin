@@ -19,6 +19,7 @@
                 <th>Description</th>
                 <th>Date</th>
                 <th>Project</th>
+                <th>requests history</th>
             </tr>
             </thead>
             <tbody >
@@ -27,10 +28,24 @@
                 <td>{{request.Description}}</td>
                 <td>{{request.Date}}</td>
                 <td>{{request.Project}}</td>
+                <td><div>
+                        <ul>
+                            <li class="info" ng-repeat="req in request.Contains">
+                                <span>{{req.clientQuantity}}</span>
+                                <span>{{req.clientBranch}}</span>
+                                <span>{{req.clientAccountsQuantity}}</span>
+                                <span>{{req.clientAccountCategory}}</span>
+                                <span>{{req.accountBalance}}</span>
+                                <span>{{req.clientAccountCategoryQuantity}}</span>
+                                <span>{{req.clientDomesticBeneficiariesQuantity}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
 </div>
 
-<a href="#/create-request" class="btn btn-lg btn-primary">Add a new request</a>
+<button  class="btn btn-lg btn-primary" ng-click="addRequest()">New</button>   <a href="#/create-request" class="btn btn-lg btn-primary">Modify</a>

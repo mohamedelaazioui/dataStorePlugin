@@ -1,7 +1,7 @@
 /**
  * Created by Mohamed on 17-08-15.
  */
-angular.module('dataStore',['templates','ngRoute','ngResource'])
+angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
     .config(['$routeProvider','$httpProvider', function($routeProvider, $httpProvider){
         $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
         $routeProvider.
@@ -9,13 +9,19 @@ angular.module('dataStore',['templates','ngRoute','ngResource'])
                 templateUrl: 'templates/landing.html',
                 controller: 'welcomeCtrl'
             }).
+            when('/login',{
+
+            }).
+            when('/register',{
+
+            }).
             when('/requests-list',{
                 templateUrl: 'templates/requests-list.html',
                 controller: 'requestsListCtrl'
             }).
-            when('/create-request',{
-                templateUrl: 'templates/create-request.html',
-                controller: 'requestCtrl'
+            when('/create-scratch-request',{
+                templateUrl: 'templates/create-scratch-request.html',
+                controller: 'welcomeCtrl'
             }).
             when('/branches-list',{
                 templateUrl: 'templates/branches-list.html',
@@ -64,20 +70,25 @@ angular.module('dataStore',['templates','ngRoute','ngResource'])
     .controller('requestsListCtrl',['$scope', function($scope){
         $scope.requests = [
             {'ID': 'TDC-281',
+             'User': 'G02751',
              'Description': 'One Fortis user with One Current Account',
-                'Date': '18/08/2015',
-                'Project': '9066'
+             'Date': '18/08/2015',
+             'Project': '9066',
+             'Contains':[{'clientQuantity':'1','clientBranch':'Fortis','clientAccountsQuantity':'1','clientAccountCategory': 'CNORM', 'clientAccountCategoryQuantity':'1'}]
             },
             {'ID': 'TDC-282',
+             'User':'G02751',
              'Description': 'One Fortis user with One Current account and One Domestic Beneficiary',
              'Date': '19/08/2015',
-            'Project': '8022'
+             'Project': '8022',
+             'Contains':[{'clientQuantity':'1','clientBranch':'Fortis','clientAccountsQuantity':'1','clientAccountCategory': 'CNORM','clientAccountCategoryQuantity':'1','clientDomesticBeneficiariesQuantity':'1'}]
             },
             {
-             'ID': 'TDC-230',
+             'ID': 'TDC-283',
              'Description': 'One Fortis user with One Current account and the account must have 1000 euro positive saldo on it',
-              'Date': '20/08/2015',
-              'Project': '8050'
+             'Date': '20/08/2015',
+             'Project': '8050',
+             'Contains':[{'clientQuantity':'3','clientBranch':'Fortis','clientAccountsQuantity':'1','clientAccountCategory': 'CNORM', 'clientAccountCategoryQuantity':'1','accountBalance':'1000'}]
             }
 
         ];
@@ -105,9 +116,112 @@ angular.module('dataStore',['templates','ngRoute','ngResource'])
           Client.save({ client: $scope.client});
         };
     }])
-    .controller('welcomeCtrl',['$scope',function($scope){
-        $scope.format = 'M/d/yy h:mm:ss a';
-        $scope.date = new Date();
+    .controller('navCtrl',['$scope','Auth',function($scope,Auth){
+        $scope.signedIn = Auth.isAuthenticated;
+        $scope.logout = Auth.logout;
+        Auth.currentUser().then(function(user){
+            $scope.user = user;
+        });
+        $scope.$on('devise:new-registration', function(e, user){
+            $scope.user = user;
+        });
+    }])
+    .controller('welcomeCtrl',['$scope',function($scope) {
+        $scope.format = 'd/M/yyyy h:mm:ss a';
+
+        // requests-lists
+        $scope.requests = [];
+        $scope.requests = [
+            {
+                'ID': 'TDC-281',
+                'User': 'G02751',
+                'Description': 'One Fortis user with One Current Account',
+                'Date': '18/08/2015',
+                'Project': '9066',
+                'Contains': [{
+                    'clientQuantity': '1',
+                    'clientBranch': 'Fortis',
+                    'clientAccountQuantity': '1',
+                    'clientAccountCategory': 'CNORM',
+                    'clientAccountCategoryQuantity': '1'
+                }]
+            },
+            {
+                'ID': 'TDC-282',
+                'User': 'G02751',
+                'Description': 'One Fortis user with One Current account and One Domestic Beneficiary',
+                'Date': '19/08/2015',
+                'Project': '8022',
+                'Contains': [{
+                    'clientQuantity': '1',
+                    'clientBranch': 'Fortis',
+                    'clientAccountQuantity': '1',
+                    'clientAccountCategory': 'CNORM',
+                    'clientAccountCategoryQuantity': '1',
+                    'clientDomesticBeneficiariesQuantity': '1'
+                }]
+            },
+            {
+                'ID': 'TDC-283',
+                'Description': 'One Fortis user with One Current account and the account must have 1000 euro positive saldo on it',
+                'Date': '20/08/2015',
+                'Project': '8050',
+                'Contains': [{
+                    'clientQuantity': '3',
+                    'clientBranch': 'Fortis',
+                    'clientAccountQuantity': '1',
+                    'clientAccountCategory': 'CNORM',
+                    'clientAccountCategoryQuantity': '1',
+                    'accountBalance': '1000'
+                }]
+            }
+
+        ];
+        $scope.orderReq = '-Date';
+
+        $scope.extendRequest = function () {
+
+        };
+
+        $scope.addRequest = function () {
+
+            var request = {
+                'ID': 'TDC-284',
+                'Description': 'One Fintro user with One Current account',
+                'Date': '22/08/2015',
+                'Project': '9020',
+                'Contains': [{
+                    'clientQuantity': '1',
+                    'clientBranch': 'Fintro',
+                    'clientAccountQuantity': '1',
+                    'clientAccountCategory': 'SNORM'
+                }]
+            };
+
+            $scope.requests.push({
+                'ID': $scope.newID,
+                'Description':$scope.newDescription,
+                'Date': $scope.newDate,
+                'Project': $scope.newProject,
+                'Contains':[{
+                             'clientQuantity': $scope.newCQ,
+                             'clientBranch': $scope.newCBranch,
+                             'clientAccountQuantity': $scope.newACQ,
+                             'clientAccountCategory': $scope.newAC,
+                             'cashDepositAmount': $scope.newCashDepositAmount
+
+                }]
+            });
+            $scope.newID = '';
+            $scope.newDescription = '';
+            $scope.newDate = '';
+            $scope.newProject = '';
+            $scope.newCQ = '';
+            $scope.newCBranch = '';
+            $scope.newAC = '';
+            $scope.newACQ = '';
+            $scope.newCashDepositAmount = '';
+        };
     }])
     .directive('myCurrentTime',['$interval','dateFilter',function($interval, dateFilter){
         function link(scope, element, attrs) {

@@ -15,5 +15,6 @@
 //= require angular
 //= require angular-route
 //= require angular-resource
+//= require angular-devise
 //= require angular-rails-templates.js.erb
 //= require_tree .
