@@ -130,7 +130,6 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
         $scope.format = 'd/M/yyyy h:mm:ss a';
 
         // requests-lists
-        $scope.requests = [];
         $scope.requests = [
             {
                 'ID': 'TDC-281',
@@ -172,7 +171,7 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
                     'clientAccountQuantity': '1',
                     'clientAccountCategory': 'CNORM',
                     'clientAccountCategoryQuantity': '1',
-                    'accountBalance': '1000'
+                    'cashDepositAmount': '1000'
                 }]
             }
 
@@ -184,20 +183,6 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
         };
 
         $scope.addRequest = function () {
-
-            var request = {
-                'ID': 'TDC-284',
-                'Description': 'One Fintro user with One Current account',
-                'Date': '22/08/2015',
-                'Project': '9020',
-                'Contains': [{
-                    'clientQuantity': '1',
-                    'clientBranch': 'Fintro',
-                    'clientAccountQuantity': '1',
-                    'clientAccountCategory': 'SNORM'
-                }]
-            };
-
             $scope.requests.push({
                 'ID': $scope.newID,
                 'Description':$scope.newDescription,
@@ -212,6 +197,7 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
 
                 }]
             });
+            // reset properties
             $scope.newID = '';
             $scope.newDescription = '';
             $scope.newDate = '';

@@ -26,7 +26,7 @@
                 <th>Description</th>
                 <th>Date</th>
                 <th>Project</th>
-                <th>requests history</th>
+                <th>Requests Detail</th>
             </tr>
             </thead>
             <tbody >
@@ -40,7 +40,7 @@
                             <li class="info" ng-repeat="req in request.Contains">
                                 {{req.clientQuantity}}
                                 {{req.clientBranch}}
-                                {{req.clientAccountsQuantity}}
+                                {{req.clientAccountQuantity}}
                                 {{req.clientAccountCategory}}
                                 {{req.cashDepositAmount}}
                                 {{req.clientDomesticBeneficiariesQuantity}}
@@ -107,10 +107,9 @@
 
     </div>
     <div class="col-sm-offset-2 col-sm-10">
-        <button  ng-disabled="frm.$invalid">Submit</button>
+        <button class="btn btn-lg btn-primary" ng-disabled="frm.$invalid">ADD</button><a href="#/create-request" class="btn btn-lg btn-primary">Modify</a>
+
     </div>
 
 </form>
-
-<button  class="btn btn-lg btn-primary">Add</button>   <a href="#/create-request" class="btn btn-lg btn-primary">Modify</a>
 
