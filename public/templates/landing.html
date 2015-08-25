@@ -5,6 +5,21 @@
 
 <br>
 
+
+<div class="container">
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">NEW<span class="caret"></span></button>
+        <ul class="dropdown-menu">
+            <li><a href="#">FROM PREVIOUS REQUEST</a></li>
+            <li><a href="#/default-request">FROM TEMPLATE</a></li>
+            <li><a href="#/create-scratch-request">FROM ZERO</a></li>
+        </ul>
+    </div>
+</div>
+
+<br>
+<br>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
@@ -25,12 +40,12 @@
                 <th>ID</th>
                 <th>Description</th>
                 <th>Date</th>
-                <th>Project</th>
-                <th>Requests Detail</th>
+                <th>Project Clarity Code</th>
+                <th>Request Detail</th>
             </tr>
             </thead>
             <tbody >
-            <tr class="danger" ng-repeat="request in requests | filter:query | orderBy:orderReq">
+            <tr class="danger" ng-repeat="request in filteredRequests=( requests | filter:query | orderBy:orderReq)">
                 <td>{{request.ID}}</td>
                 <td>{{request.Description}}</td>
                 <td>{{request.Date}}</td>
@@ -49,67 +64,10 @@
                 </div>
                 </td>
             </tr>
+
             </tbody>
         </table>
     </div>
 </div>
 
-<form class="form-horizontal" role="form" name="frm" ng-submit="addRequest()">
-    <div>
-        <label label class="control-label col-sm-2">ID:</label>
-        <input type="text" name="newID" placeholder="ID" ng-model="newID" required />
-    </div>
-    <br>
-    <div>
-        <label label class="control-label col-sm-2">Description:</label>
-        <input type="text" name="newDescription" placeholder="Description" ng-model="newDescription">
-    </div>
-    <br>
-    <div>
-        <label label class="control-label col-sm-2">Date:</label>
-        <input type="text" name="newDate" placeholder="Date" ng-model="newDate" required />
-    </div>
-    <br>
-    <div>
-        <label label class="control-label col-sm-2">Project:</label>
-        <input type="text" name="newProject" placeholder="Clarity Code" ng-model="newProject" required />
-    </div>
-    <br>
-
-    <div>
-        Request detail:
-        <br/>
-        <div>
-            <label label class="control-label col-sm-2">Quantity:</label>
-            <input type="text" name="newCQ" placeholder="Number of clients" ng-model="newCQ" required />
-        </div>
-        <br>
-        <div>
-            <label label class="control-label col-sm-2">Branch:</label>
-            <input type="text" name="newCBranch" placeholder="Office" ng-model="newCBranch" required />
-        </div>
-        <br>
-        <div>
-            <label label class="control-label col-sm-2">Account Category:</label>
-            <input type="text" name="newAC" placeholder="Account Category" ng-model="newAC" required />
-        </div>
-        <br>
-        <div>
-            <label label class="control-label col-sm-2">Account Category Quantity:</label>
-            <input type="text" name="newACQ" placeholder="Number of accounts required" ng-model="newACQ" required />
-        </div>
-        <br>
-        <div>
-            <label label class="control-label col-sm-2">Amount to Add:</label>
-            <input type="text" name="newCashDepositAmount" placeholder="Amount to Deposit in Euro" ng-model="newCashDepositAmount" required />
-        </div>
-        <br>
-
-    </div>
-    <div class="col-sm-offset-2 col-sm-10">
-        <button class="btn btn-lg btn-primary" ng-disabled="frm.$invalid">ADD</button><a href="#/create-request" class="btn btn-lg btn-primary">Modify</a>
-
-    </div>
-
-</form>
 

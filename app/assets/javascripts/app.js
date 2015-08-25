@@ -1,6 +1,8 @@
 /**
  * Created by Mohamed on 17-08-15.
  */
+'use strict';
+
 angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
     .config(['$routeProvider','$httpProvider', function($routeProvider, $httpProvider){
         $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
@@ -21,6 +23,10 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             }).
             when('/create-scratch-request',{
                 templateUrl: 'templates/create-scratch-request.html',
+                controller: 'welcomeCtrl'
+            }).
+            when('/default-request',{
+                templateUrl: 'templates/default-request.html',
                 controller: 'welcomeCtrl'
             }).
             when('/branches-list',{

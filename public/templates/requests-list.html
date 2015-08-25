@@ -1,3 +1,10 @@
+<div>
+    <span my-current-time="format"></span>
+</div>
+
+
+<br>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
@@ -18,34 +25,35 @@
                 <th>ID</th>
                 <th>Description</th>
                 <th>Date</th>
-                <th>Project</th>
-                <th>requests history</th>
+                <th>Project Clarity Code</th>
+                <th>Request Detail</th>
             </tr>
             </thead>
             <tbody >
-            <tr class="danger" ng-repeat="request in requests | filter:query | orderBy:orderReq">
+            <tr class="danger" ng-repeat="request in filteredRequests=( requests | filter:query | orderBy:orderReq)">
                 <td>{{request.ID}}</td>
                 <td>{{request.Description}}</td>
                 <td>{{request.Date}}</td>
                 <td>{{request.Project}}</td>
                 <td><div>
-                        <ul>
-                            <li class="info" ng-repeat="req in request.Contains">
-                                <span>{{req.clientQuantity}}</span>
-                                <span>{{req.clientBranch}}</span>
-                                <span>{{req.clientAccountsQuantity}}</span>
-                                <span>{{req.clientAccountCategory}}</span>
-                                <span>{{req.accountBalance}}</span>
-                                <span>{{req.clientAccountCategoryQuantity}}</span>
-                                <span>{{req.clientDomesticBeneficiariesQuantity}}</span>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul>
+                        <li class="info" ng-repeat="req in request.Contains">
+                            {{req.clientQuantity}}
+                            {{req.clientBranch}}
+                            {{req.clientAccountQuantity}}
+                            {{req.clientAccountCategory}}
+                            {{req.cashDepositAmount}}
+                            {{req.clientDomesticBeneficiariesQuantity}}
+                        </li>
+                    </ul>
+                </div>
                 </td>
             </tr>
+
             </tbody>
         </table>
     </div>
 </div>
 
-<button  class="btn btn-lg btn-primary" ng-click="addRequest()">New</button>   <a href="#/create-request" class="btn btn-lg btn-primary">Modify</a>
+
+
