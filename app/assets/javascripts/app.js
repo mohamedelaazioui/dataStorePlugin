@@ -29,6 +29,10 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
                 templateUrl: 'templates/default-request.html',
                 controller: 'welcomeCtrl'
             }).
+            when('/previous-request',{
+                templateUrl: 'templates/previous-request.html',
+                controller: 'welcomeCtrl'
+            }).
             when('/branches-list',{
                 templateUrl: 'templates/branches-list.html',
                 controller: 'branchesListCtrl'
@@ -264,4 +268,21 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
         return {
             link: link
         };
-    }]);
+    }])
+    .directive('myPreviousRequest',function(){
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModelController) {
+                ngModelController.$parsers.push(function(data) {
+                    //convert data from view format to model format
+                    return data; //converted
+                });
+
+                ngModelController.$formatters.push(function(data) {
+                    //convert data from model format to view format
+                    return data; //converted
+                });
+            }
+        };
+    })
+;

@@ -1,0 +1,107 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <!--Sidebar content-->
+            Search: <input ng-model="query">
+            <br>
+            Sort by:
+            <br>
+            <select ng-model="orderReq">
+                <option value="-Date">Creation Date</option>
+                <option value="Project">Alphanumeric</option>
+            </select>
+
+        </div>
+        <table class="table" >
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Project Clarity Code</th>
+                <th>Request Detail</th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr class="danger" ng-repeat="request in filteredRequests=( requests | filter:query | orderBy:orderReq )">
+                <td>{{request.ID}}</td>
+                <td>{{request.Description}}</td>
+                <td>{{request.Date}}</td>
+                <td>{{request.Project}}</td>
+                <td><div>
+                    <ul>
+                        <li class="info" ng-repeat="req in request.Contains">
+                            {{req.clientQuantity}}
+                            {{req.clientBranch}}
+                            {{req.clientAccountQuantity}}
+                            {{req.clientAccountCategory}}
+                            {{req.cashDepositAmount}}
+                            {{req.clientDomesticBeneficiariesQuantity}}
+                        </li>
+                    </ul>
+                </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<form class="form-horizontal" role="form" name="frm" ng-submit="addRequest()">
+    <div>
+        <label label class="control-label col-sm-2">ID:</label>
+        <input type="text" name="newID" placeholder="ID" ng-model="newID" required />
+    </div>
+    <br>
+    <div>
+        <label label class="control-label col-sm-2">Description:</label>
+        <input my-previous-request type="text" name="newDescription" ng-model="filteredRequests.Description" />
+    </div>
+    <br>
+    <div>
+        <label label class="control-label col-sm-2">Date:</label>
+        <input type="text" name="newDate" placeholder="Date" ng-model="newDate" required />
+    </div>
+    <br>
+    <div>
+        <label label class="control-label col-sm-2">Project:</label>
+        <input type="text" name="newProject" placeholder="Clarity Code" ng-model="newProject" required />
+    </div>
+    <br>
+
+    <div>
+        Request detail:
+        <br/>
+        <div>
+            <label label class="control-label col-sm-2">Quantity:</label>
+            <input type="text" name="newCQ" placeholder="Number of clients" ng-model="newCQ" required />
+        </div>
+        <br>
+        <div>
+            <label label class="control-label col-sm-2">Branch:</label>
+            <input type="text" name="newCBranch" placeholder="Office" ng-model="newCBranch" required />
+        </div>
+        <br>
+        <div>
+            <label label class="control-label col-sm-2">Account Category:</label>
+            <input type="text" name="newAC" placeholder="Account Category" ng-model="newAC" required />
+        </div>
+        <br>
+        <div>
+            <label label class="control-label col-sm-2">Account Category Quantity:</label>
+            <input type="text" name="newACQ" placeholder="Number of accounts required" ng-model="newACQ" required />
+        </div>
+        <br>
+        <div>
+            <label label class="control-label col-sm-2">Amount to Add:</label>
+            <input type="text" name="newCashDepositAmount" placeholder="Amount to Deposit in Euro" ng-model="newCashDepositAmount"/>
+        </div>
+        <br>
+
+    </div>
+    <div class="col-sm-offset-2 col-sm-10">
+        <button class="btn btn-lg btn-primary" ng-disabled="frm.$invalid">ADD</button>
+
+    </div>
+</form>
