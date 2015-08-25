@@ -27,7 +27,7 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             }).
             when('/default-request',{
                 templateUrl: 'templates/default-request.html',
-                controller: 'defaultRequestCtrl'
+                controller: 'welcomeCtrl'
             }).
             when('/branches-list',{
                 templateUrl: 'templates/branches-list.html',
@@ -132,7 +132,7 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             $scope.user = user;
         });
     }])
-    .controller('defautRequestCtrl',['$scope',function($scope){
+    .controller('defaultRequestCtrl',['$scope',function($scope){
         $scope.Description = 'One Fortis Client, with One Current Account, having 1000 EUROS, positive balance';
     }])
     .controller('welcomeCtrl',['$scope',function($scope) {
@@ -216,6 +216,25 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             $scope.newAC = '';
             $scope.newACQ = '';
             $scope.newCashDepositAmount = '';
+        };
+
+        $scope.addDefaultRequest = function(){
+            $scope.requests.push({
+                'ID': $scope.newID,
+                'Description':$scope.newDescription,
+                'Date': $scope.newDate,
+                'Project': $scope.newProject,
+                'Contains':[{
+                    'clientQuantity': $scope.newCQ,
+                    'clientBranch': $scope.newCBranch,
+                    'clientAccountQuantity': $scope.newACQ,
+                    'clientAccountCategory': $scope.newAC,
+                    'cashDepositAmount': $scope.newCashDepositAmount
+
+                }]
+            });
+            // reset ID
+            $scope.newID = '';
         };
     }])
     .directive('myCurrentTime',['$interval','dateFilter',function($interval, dateFilter){

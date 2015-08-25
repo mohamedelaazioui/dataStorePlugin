@@ -55,4 +55,40 @@
 
     </div>
 
+    <div>
+        <table class="table" >
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Project Clarity Code</th>
+                <th>Request Detail</th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr class="danger" ng-repeat="request in filteredRequests=( requests | filter:query | orderBy:orderReq)">
+                <td>{{request.ID}}</td>
+                <td>{{request.Description}}</td>
+                <td>{{request.Date}}</td>
+                <td>{{request.Project}}</td>
+                <td><div>
+                    <ul>
+                        <li class="info" ng-repeat="req in request.Contains">
+                            {{req.clientQuantity}}
+                            {{req.clientBranch}}
+                            {{req.clientAccountQuantity}}
+                            {{req.clientAccountCategory}}
+                            {{req.cashDepositAmount}}
+                            {{req.clientDomesticBeneficiariesQuantity}}
+                        </li>
+                    </ul>
+                </div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
 </form>
