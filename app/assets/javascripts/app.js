@@ -27,7 +27,7 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             }).
             when('/default-request',{
                 templateUrl: 'templates/default-request.html',
-                controller: 'welcomeCtrl'
+                controller: 'defaultRequestCtrl'
             }).
             when('/branches-list',{
                 templateUrl: 'templates/branches-list.html',
@@ -131,6 +131,9 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
         $scope.$on('devise:new-registration', function(e, user){
             $scope.user = user;
         });
+    }])
+    .controller('defautRequestCtrl',['$scope',function($scope){
+        $scope.Description = 'One Fortis Client, with One Current Account, having 1000 EUROS, positive balance';
     }])
     .controller('welcomeCtrl',['$scope',function($scope) {
         $scope.format = 'd/M/yyyy h:mm:ss a';
