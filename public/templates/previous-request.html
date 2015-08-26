@@ -1,3 +1,5 @@
+
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2">
@@ -48,7 +50,9 @@
     </div>
 </div>
 
-<form class="form-horizontal" role="form" name="frm" ng-submit="addRequest()">
+<form class="form-horizontal" role="form" name="frm" ng-submit="addDefaultRequest()">
+
+    Total selected request: {{ filteredRequests.length }}
     <div>
         <label label class="control-label col-sm-2">ID:</label>
         <input type="text" name="newID" placeholder="ID" ng-model="newID" required />
@@ -56,17 +60,17 @@
     <br>
     <div>
         <label label class="control-label col-sm-2">Description:</label>
-        <input my-previous-request type="text" name="newDescription" ng-model="filteredRequests.Description" />
+        <input type="text" name="newDescription" ng-value ="filteredRequests[0].Description" ng-model="newDescription"/>
     </div>
     <br>
     <div>
         <label label class="control-label col-sm-2">Date:</label>
-        <input type="text" name="newDate" placeholder="Date" ng-model="newDate" required />
+        <input type="text" name="newDate" ng-value="filteredRequests[0].Date" ng-model="newDate"/>
     </div>
     <br>
     <div>
         <label label class="control-label col-sm-2">Project:</label>
-        <input type="text" name="newProject" placeholder="Clarity Code" ng-model="newProject" required />
+        <input type="text" name="newProject" ng-value="filteredRequests[0].Project" ng-model="newProject"/>
     </div>
     <br>
 
@@ -75,27 +79,27 @@
         <br/>
         <div>
             <label label class="control-label col-sm-2">Quantity:</label>
-            <input type="text" name="newCQ" placeholder="Number of clients" ng-model="newCQ" required />
+            <input type="text" name="newCQ" ng-value="filteredRequests[0].Contains[0].clientQuantity" ng-model="newCQ"/>
         </div>
         <br>
         <div>
             <label label class="control-label col-sm-2">Branch:</label>
-            <input type="text" name="newCBranch" placeholder="Office" ng-model="newCBranch" required />
+            <input type="text" name="newCBranch" ng-value="filteredRequests[0].Contains[0].clientBranch" ng-model="newCBranch"/>
         </div>
         <br>
         <div>
             <label label class="control-label col-sm-2">Account Category:</label>
-            <input type="text" name="newAC" placeholder="Account Category" ng-model="newAC" required />
+            <input type="text" name="newAC" ng-value="filteredRequests[0].Contains[0].clientAccountCategory" ng-model="newAC"/>
         </div>
         <br>
         <div>
             <label label class="control-label col-sm-2">Account Category Quantity:</label>
-            <input type="text" name="newACQ" placeholder="Number of accounts required" ng-model="newACQ" required />
+            <input type="text" name="newACQ" ng-value="filteredRequests[0].Contains[0].clientAccountQuantity" ng-model="newACQ"/>
         </div>
         <br>
         <div>
             <label label class="control-label col-sm-2">Amount to Add:</label>
-            <input type="text" name="newCashDepositAmount" placeholder="Amount to Deposit in Euro" ng-model="newCashDepositAmount"/>
+            <input type="text" name="newCashDepositAmount" ng-value="filteredRequests[0].Contains[0].cashDepositAmount" ng-model="newCashDepositAmount"/>
         </div>
         <br>
 

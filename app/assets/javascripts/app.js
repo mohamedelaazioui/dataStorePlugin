@@ -143,57 +143,61 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
         $scope.format = 'd/M/yyyy h:mm:ss a';
 
         // requests-lists
-        $scope.requests = [
-            {
-                'ID': 'TDC-281',
-                'User': 'G02751',
-                'Description': 'One Fortis user with One Current Account',
-                'Date': '18/08/2015',
-                'Project': '9066',
-                'Contains': [{
-                    'clientQuantity': '1',
-                    'clientBranch': 'Fortis',
-                    'clientAccountQuantity': '1',
-                    'clientAccountCategory': 'CNORM',
-                    'clientAccountCategoryQuantity': '1'
-                }]
-            },
-            {
-                'ID': 'TDC-282',
-                'User': 'G02751',
-                'Description': 'One Fortis user with One Current account and One Domestic Beneficiary',
-                'Date': '19/08/2015',
-                'Project': '8022',
-                'Contains': [{
-                    'clientQuantity': '1',
-                    'clientBranch': 'Fortis',
-                    'clientAccountQuantity': '1',
-                    'clientAccountCategory': 'CNORM',
-                    'clientAccountCategoryQuantity': '1',
-                    'clientDomesticBeneficiariesQuantity': '1'
-                }]
-            },
-            {
-                'ID': 'TDC-283',
-                'Description': 'One Fortis user with One Current account and the account must have 1000 euro positive saldo on it',
-                'Date': '20/08/2015',
-                'Project': '8050',
-                'Contains': [{
-                    'clientQuantity': '3',
-                    'clientBranch': 'Fortis',
-                    'clientAccountQuantity': '1',
-                    'clientAccountCategory': 'CNORM',
-                    'clientAccountCategoryQuantity': '1',
-                    'cashDepositAmount': '1000'
-                }]
-            }
+            $scope.requests = [
+                {
+                    'ID': 'TDC-281',
+                    'User': 'G02751',
+                    'Description': 'One Fortis user with One Current Account',
+                    'Date': '18/08/2015',
+                    'Project': '9066',
+                    'Contains': [{
+                        'clientQuantity': '1',
+                        'clientBranch': 'Fortis',
+                        'clientAccountQuantity': '1',
+                        'clientAccountCategory': 'CNORM',
+                        'clientAccountCategoryQuantity': '1'
+                    }]
+                },
+                {
+                    'ID': 'TDC-282',
+                    'User': 'G02751',
+                    'Description': 'One Fortis user with One Current account and One Domestic Beneficiary',
+                    'Date': '19/08/2015',
+                    'Project': '8022',
+                    'Contains': [{
+                        'clientQuantity': '1',
+                        'clientBranch': 'Fortis',
+                        'clientAccountQuantity': '1',
+                        'clientAccountCategory': 'CNORM',
+                        'clientAccountCategoryQuantity': '1',
+                        'clientDomesticBeneficiariesQuantity': '1'
+                    }]
+                },
+                {
+                    'ID': 'TDC-283',
+                    'Description': 'One Fortis user with One Current account and the account must have 1000 euro positive saldo on it',
+                    'Date': '20/08/2015',
+                    'Project': '8050',
+                    'Contains': [{
+                        'clientQuantity': '3',
+                        'clientBranch': 'Fortis',
+                        'clientAccountQuantity': '1',
+                        'clientAccountCategory': 'CNORM',
+                        'clientAccountCategoryQuantity': '1',
+                        'cashDepositAmount': '1000'
+                    }]
+                }
 
-        ];
+            ];
+
         $scope.orderReq = '-Date';
+
 
         $scope.extendRequest = function () {
 
         };
+
+
 
         $scope.addRequest = function () {
             $scope.requests.push({
@@ -209,7 +213,9 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
                              'cashDepositAmount': $scope.newCashDepositAmount
 
                 }]
+
             });
+            $scope.$watch('requests', function(newVal, oldVal) {}, true );
             // reset properties
             $scope.newID = '';
             $scope.newDescription = '';
@@ -221,6 +227,7 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             $scope.newACQ = '';
             $scope.newCashDepositAmount = '';
         };
+
 
         $scope.addDefaultRequest = function(){
             $scope.requests.push({
@@ -239,6 +246,7 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             });
             // reset ID
             $scope.newID = '';
+            $scope.$watch('requests', function(newVal, oldVal) {}, true );
         };
     }])
     .directive('myCurrentTime',['$interval','dateFilter',function($interval, dateFilter){
