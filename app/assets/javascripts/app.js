@@ -27,7 +27,7 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             }).
             when('/default-request',{
                 templateUrl: 'templates/default-request.html',
-                controller: 'welcomeCtrl'
+                controller: 'defaultRequestCtrl'
             }).
             when('/previous-request',{
                 templateUrl: 'templates/previous-request.html',
@@ -136,8 +136,102 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             $scope.user = user;
         });
     }])
-    .controller('defaultRequestCtrl',['$scope',function($scope){
-        $scope.Description = 'One Fortis Client, with One Current Account, having 1000 EUROS, positive balance';
+    .controller('defaultRequestCtrl',['$scope','$filter',function($scope, $filter){
+        var date = new Date();
+        var numberOfDaysToAdd = 2;
+        date.setDate(date.getDate() + numberOfDaysToAdd);
+
+        date = $filter('date')(date, "yyyy-MM-dd");
+        $scope.Date = date ;
+        $scope.requests = [
+            {
+                'ID': 'TDC-4',
+                'User': 'G02751',
+                'Description': 'One Fortis user with One Current Account',
+                'Date': '18/08/2015',
+                'Project': '9066',
+                'Contains': [{
+                    'clientQuantity': '1',
+                    'clientBranch': 'Fortis',
+                    'clientAccountQuantity': '1',
+                    'clientAccountCategory': 'CNORM',
+                    'clientAccountCategoryQuantity': '1'
+                }]
+            },
+            {
+                'ID': 'TDC-3',
+                'User': 'G02751',
+                'Description': 'One Fortis user with One Current account and One Domestic Beneficiary',
+                'Date': '19/08/2015',
+                'Project': '8022',
+                'Contains': [{
+                    'clientQuantity': '1',
+                    'clientBranch': 'Fortis',
+                    'clientAccountQuantity': '1',
+                    'clientAccountCategory': 'CNORM',
+                    'clientAccountCategoryQuantity': '1',
+                    'clientDomesticBeneficiariesQuantity': '1'
+                }]
+            },
+            {
+                'ID': 'TDC-2',
+                'Description': 'One Fintro user with One Current account and the account must have 1000 euro positive saldo on it',
+                'Date': '20/08/2015',
+                'Project': '8050',
+                'Contains': [{
+                    'clientQuantity': '3',
+                    'clientBranch': 'Fintro',
+                    'clientAccountQuantity': '1',
+                    'clientAccountCategory': 'CNORM',
+                    'clientAccountCategoryQuantity': '1',
+                    'cashDepositAmount': '1000'
+                }]
+            },
+            {
+                'ID': 'TDC-1',
+                'Description': 'One Hello user with One Current account and the account must have 1000 euro positive saldo on it',
+                'Date': '28/08/2015',
+                'Project': '8030',
+                'Contains': [{
+                    'clientQuantity': '3',
+                    'clientBranch': 'Hello',
+                    'clientAccountQuantity': '1',
+                    'clientAccountCategory': 'CDIGOF',
+                    'clientAccountCategoryQuantity': '1',
+                    'cashDepositAmount': '1000'
+                }]
+            }
+
+        ];
+
+        $scope.orderReq = '-Date';
+
+        $scope.addDefaultRequest = function(){
+            $scope.requests.push({
+                'ID': $scope.newID,
+                'Description':$scope.newDescription,
+                'Date': $scope.newDate,
+                'Project': $scope.newProject,
+                'Contains':[{
+                    'clientQuantity': $scope.newCQ,
+                    'clientBranch': $scope.newCBranch,
+                    'clientAccountQuantity': $scope.newACQ,
+                    'clientAccountCategory': $scope.newAC,
+                    'cashDepositAmount': $scope.newCashDepositAmount
+
+                }]
+            });
+            // reset ID
+            $scope.newID = '';
+
+        };
+
+        $scope.exportData = function () {
+            var blob = new Blob([document.getElementById('exportable').innerHTML], {
+                type: "application/vnd.ms-excel;charset=utf-8"
+            });
+            saveAs(blob, "Report.xls");
+        };
     }])
     .controller('welcomeCtrl',['$scope',function($scope) {
         $scope.format = 'd/M/yyyy h:mm:ss a';
@@ -229,7 +323,7 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
                 }]
 
             });
-            $scope.$watch('requests', function(newVal, oldVal) {}, true );
+
             // reset properties
             $scope.newID = '';
             $scope.newDescription = '';
@@ -242,6 +336,24 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             $scope.newCashDepositAmount = '';
         };
 
+        $scope.addFromPrevious = function(){
+            $scope.requests.push({
+                'ID': $scope.ID,
+                'Description':$scope.requests.Description,
+                'Date': $scope.Date,
+                'Project': $scope.Project,
+                'Contains':[{
+                    'clientQuantity': $scope.CQ,
+                    'clientBranch': $scope.CBranch,
+                    'clientAccountQuantity': $scope.ACQ,
+                    'clientAccountCategory': $scope.AC,
+                    'cashDepositAmount': $scope.CashDepositAmount
+
+                }]
+
+            });
+
+        };
 
         $scope.addDefaultRequest = function(){
             $scope.requests.push({
@@ -260,7 +372,14 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
             });
             // reset ID
             $scope.newID = '';
-            $scope.$watch('requests', function(newVal, oldVal) {}, true );
+
+        };
+
+        $scope.exportData = function () {
+            var blob = new Blob([document.getElementById('exportable').innerHTML], {
+                type: "application/vnd.ms-excel;charset=utf-8"
+            });
+            saveAs(blob, "Report.xls");
         };
     }])
     .directive('myCurrentTime',['$interval','dateFilter',function($interval, dateFilter){

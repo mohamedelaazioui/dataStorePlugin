@@ -10,8 +10,8 @@
     </div>
     <br>
     <div>
-        <label label class="control-label col-sm-2">Date:</label>
-        <input type="text" name ="newDate" ng-model="newDate" ng-init="newDate='28/08/2015'" required />
+        <label label class="control-label col-sm-2">Delivery Date:</label>
+        <input type="text" name ="newDate" ng-model="newDate" ng-init="newDate= Date" required />
     </div>
     <br>
     <div>
@@ -55,13 +55,15 @@
 
     </div>
 
+    <button ng-click="exportData()">Export</button>
+    <div id="exportable">
     <div>
         <table class="table" >
             <thead>
             <tr>
                 <th>ID</th>
                 <th>Description</th>
-                <th>Date</th>
+                <th>Delivery Date</th>
                 <th>Project Clarity Code</th>
                 <th>Request Detail</th>
             </tr>
@@ -89,5 +91,5 @@
             </tbody>
         </table>
     </div>
-
+  </div>
 </form>
