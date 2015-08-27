@@ -142,6 +142,8 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
         date.setDate(date.getDate() + numberOfDaysToAdd);
 
         date = $filter('date')(date, "yyyy-MM-dd");
+        $scope.branches = ['Fortis','Fintro','Hello','Mix(Fortis,Hello)', 'Mix(Fortis,Fintro)','Triple'];
+        $scope.accountCategories = ['CNORM','CDIGOF','SNORM','TNORM','CUSTODY','SPENS','SHYSA']
         $scope.Date = date ;
         $scope.requests = [
             {
