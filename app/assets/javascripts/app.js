@@ -186,6 +186,20 @@ angular.module('dataStore',['templates','ngRoute','ngResource','Devise'])
                         'clientAccountCategoryQuantity': '1',
                         'cashDepositAmount': '1000'
                     }]
+                },
+                {
+                    'ID': 'TDC-284',
+                    'Description': 'One Fortis user with One Current account and the account must have 1000 euro positive saldo on it',
+                    'Date': '22/08/2015',
+                    'Project': '8030',
+                    'Contains': [{
+                        'clientQuantity': '3',
+                        'clientBranch': 'Hello',
+                        'clientAccountQuantity': '1',
+                        'clientAccountCategory': 'CDIGOF',
+                        'clientAccountCategoryQuantity': '1',
+                        'cashDepositAmount': '1000'
+                    }]
                 }
 
             ];
