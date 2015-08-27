@@ -30,12 +30,16 @@
         <br>
         <div>
             <label label class="control-label col-sm-2">Branch:</label>
-            <input type="text" name="newCBranch" placeholder="Office" ng-model="newCBranch" required />
+            <select  ng-model="newCBranch">
+                <option ng-repeat="branch in branches" ng-value="{{branch}}">{{branch}}</option>
+            </select>
         </div>
         <br>
         <div>
             <label label class="control-label col-sm-2">Account Category:</label>
-            <input type="text" name="newAC" placeholder="Account Category" ng-model="newAC" required />
+            <select  ng-model="newAC">
+                <option ng-repeat="ac in accountCategories" ng-value="{{ac}}">{{ac}}</option>
+            </select>
         </div>
         <br>
         <div>
