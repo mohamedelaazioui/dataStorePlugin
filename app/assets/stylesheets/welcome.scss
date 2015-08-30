@@ -38,3 +38,8 @@ DIV.container {
   display: table-cell;
   vertical-align: middle
 }
+
+.ngFade.ng-enter { transition: 0.1s linear all; opacity: 0; }
+.ngFade.ng-enter-active { opacity: 1; }
+.ngFade.ng-leave { transition: 0.1s linear all; opacity: 1; }
+.ngFade.ng-leave-active { opacity: 0; }
